@@ -14,7 +14,7 @@ var gameState = PLAY;
 function preload(){
   
   
-  monkey_running = loadAnimation("sprite_0.png","sprite_1.png","sprite_2.png","sprite_3.png","sprite_4.png",                       "sprite_5.png","sprite_6.png","sprite_7.png","sprite_8.png");
+  monkey_running = loadAnimation("sprite_0.png","sprite_1.png","sprite_2.png","sprite_3.png","sprite_4.png","sprite_5.png","sprite_6.png","sprite_7.png","sprite_8.png");
   
   bananaImage = loadImage("banana.png");
   obstacleImage = loadImage("obstacle.png");
@@ -27,8 +27,9 @@ function setup() {
   createCanvas(600,600);
   monkey  =  createSprite(50,450,10,10);
   monkey.addAnimation("running",monkey_running);
+  monkey.addAnimation("banana",bananaImage);
   monkey.scale = 0.18;
-  monkey.debug =true;
+  // monkey.debug =true;
   
   ground = createSprite(300,555,600,100);
   ground.shapeColor = "brown";
@@ -91,13 +92,12 @@ function draw() {
     survival = 0;
     monkey.y = 450;
     
+    monkey.changeAnimation("banana");
   }
   
   monkey.collide(ground);
   
   drawSprites();
-  
-  survival = round(frameCount/frameRate());
   
 }
 
@@ -125,7 +125,7 @@ function createObstacles(){
     obstacle.addImage(obstacleImage);
     obstacle.velocityX  = -6;
     obstacle.lifetime = 100;
-    obstacle.debug = true;
+    //obstacle.debug = true;
     obstacle.scale = 0.2;
     obstacleGroup.add(obstacle);
     
